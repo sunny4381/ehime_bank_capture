@@ -25,7 +25,7 @@ set_target_self_and_click("#contents > div > p.btn-base.btn-default.btn-next.btn
 
 # 撮影
 sleep 10
-@browser.screenshot(path: ENV["OUTPUT"] || "account.png")
+@browser.screenshot(selector: "#swpBlkChild011", path: ENV["OUTPUT"] || "account.png")
 
 # ログアウト
 @browser.at_css("[name='forward_BSM0001']").click
