@@ -24,5 +24,5 @@ set_target_self_and_click("#contents > div > p.btn-base.btn-default.btn-next.btn
 @browser.at_css("[name='forward_BSM2010']").click
 
 sleep 10
-@browser.screenshot(path: "account.png")
+@browser.screenshot(path: ENV["OUTPUT"] || "account.png")
 @browser.quit
