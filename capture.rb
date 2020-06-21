@@ -7,7 +7,7 @@ options = {
   window_size: [ 1024, 768 ],
   timeout: 300
 }
-options[headless] = ENV['headless'].to_s.downcase == "true" if ENV.key?('headless')
+options[:headless] = ENV['headless'].to_s.downcase == "true" if ENV.key?('headless')
 @browser = Ferrum::Browser.new(options)
 
 def set_target_self_and_click(path)
