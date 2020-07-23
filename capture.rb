@@ -23,6 +23,13 @@ set_target_self_and_click("#contents > div > p.btn-base.btn-default.btn-next.btn
 @browser.at_css("[name='BPW0020']").focus.type(ENV['PASSWORD'])
 @browser.at_css("[name='forward_BSM2010']").click
 
+# パスワード変更の確認画面？
+sleep 10
+button = @browser.at_css("#btn002")
+if button && button.text == "確定する"
+  button.click
+end
+
 # 撮影
 sleep 10
 @browser.screenshot(selector: "#swpBlkChild011", path: ENV["OUTPUT"] || "account.png")
