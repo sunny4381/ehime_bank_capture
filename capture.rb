@@ -5,7 +5,8 @@ Dotenv.load
 
 options = {
   window_size: [ 1024, 768 ],
-  timeout: 300
+  timeout: 300,
+  process_timeout: 120
 }
 options[:headless] = ENV['headless'].to_s.downcase == "true" if ENV.key?('headless')
 @browser = Ferrum::Browser.new(options)
