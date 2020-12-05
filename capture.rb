@@ -37,6 +37,10 @@ begin
   @browser.screenshot(selector: "#swpBlkChild011", path: ENV["OUTPUT"] || "account.png")
 rescue => e
   puts "#{e.class} (#{e.message}):\n  #{e.backtrace.join("\n  ")}"
+
+  filename = "/tmp/error-#{Time.now.to_i}"
+  File.write("#{filename}.html", @browser.body.to_s)
+  @browser.screenshot(path: "#{filename}.png")
 end
 
 # ログアウト
