@@ -32,8 +32,12 @@ if button && button.text == "確定する"
 end
 
 # 撮影
-sleep 10
-@browser.screenshot(selector: "#swpBlkChild011", path: ENV["OUTPUT"] || "account.png")
+sleep 30
+begin
+  @browser.screenshot(selector: "#swpBlkChild011", path: ENV["OUTPUT"] || "account.png")
+rescue => e
+  puts "#{e.class} (#{e.message}):\n  #{e.backtrace.join("\n  ")}"
+end
 
 # ログアウト
 @browser.at_css("[name='forward_BSM0001']").click
