@@ -24,6 +24,12 @@ set_target_self_and_click("#contents > div > p.btn-base.btn-default.btn-next.btn
 @browser.at_css("[name='BPW0020']").focus.type(ENV['PASSWORD'])
 @browser.at_css("[name='forward_BSM2010']").click
 
+# リスクベース認証画面
+section = @browser.at_css("#swpBlkChild003")
+if section && section.text && section.text.include?("リスクベース認証")
+  raise "リスクベース認証画面が表示されているので、自動で撮影できません。"
+end
+
 # パスワード変更の確認画面？
 sleep 10
 button = @browser.at_css("#btn002")
