@@ -23,22 +23,35 @@ set_target_self_and_click("#contents > div > p.btn-base.btn-default.btn-next.btn
 @browser.at_css("[name='BTX0010']").focus.type(ENV['USER_ID'])
 @browser.at_css("[name='BPW0020']").focus.type(ENV['PASSWORD'])
 @browser.at_css("[name='forward_BSM2010']").click
+sleep 10
 
 # リスクベース認証画面
 section = @browser.at_css("#swpBlkChild003")
 if section && section.text && section.text.include?("リスクベース認証")
-  raise "リスクベース認証画面が表示されているので、自動で撮影できません。"
+  question = @browser.at_css("#tblLen001 #msg001").text
+
+  answered = false
+  3.times do |i|
+    next unless question.include?(ENV["Q#{i + 1}"])
+
+    @browser.at_css("[name='BPW0010'").focus.type(ENV["A#{i + 1}"])
+    @browser.at_css("[name='forward_BSM0010']").click
+    answered = true
+    sleep 10
+  end
+
+  raise "リスクベース認証画面が表示されているので自動撮影を続行できません。" unless answered
 end
 
 # パスワード変更の確認画面？
-sleep 10
 button = @browser.at_css("#btn002")
 if button && button.text == "確定する"
   button.click
+  sleep 10
 end
 
 # 撮影
-sleep 30
+sleep 20
 begin
   @browser.screenshot(selector: "#swpBlkChild011", path: ENV["OUTPUT"] || "account.png")
 rescue => e
